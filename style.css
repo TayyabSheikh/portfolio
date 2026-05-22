@@ -139,9 +139,9 @@ ul {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0;
+    z-index: -1; /* Ensures it sits behind everything */
     pointer-events: none; /* Let clicks pass through */
-    opacity: 0.12; /* Option 1: Faint watermark opacity */
+    opacity: 0.12; /* Faint watermark opacity */
 }
 
 /* --- Header & Floating Navigation --- */
