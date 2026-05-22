@@ -8,14 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
 
-    // Load theme preference from localStorage or default to system preference
+    // Load theme preference from localStorage (Default to dark)
     const savedTheme = localStorage.getItem('theme');
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    
-    if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
+
+    // Apply theme
+    if (savedTheme === 'light') {
         htmlElement.setAttribute('data-theme', 'light');
     } else {
         htmlElement.setAttribute('data-theme', 'dark');
+        // We set localStorage to dark if it was null, so it's locked in
+        if (!savedTheme) localStorage.setItem('theme', 'dark');
     }
 
     // Toggle theme callback

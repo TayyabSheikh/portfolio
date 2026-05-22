@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         transparent: true,
         opacity: 0.8, // Opacity of the points themselves
         alphaTest: 0.05,
-        blending: THREE.AdditiveBlending,
+        blending: THREE.NormalBlending, // Normal blending works on both dark and light backgrounds
         sizeAttenuation: true
     });
     
