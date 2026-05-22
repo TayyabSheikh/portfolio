@@ -29,10 +29,8 @@
 </head>
 <body>
 
-    <!-- Particle/Background Ambient Mesh Glows -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
-    <div class="ambient-glow glow-3"></div>
+    <!-- 3D WebGL Background Container -->
+    <div id="webgl-container"></div>
 
     <!-- Floating Navigation Bar -->
     <header class="header">
@@ -43,6 +41,7 @@
             
             <nav class="nav-links" id="nav-links-container">
                 <a href="#about" class="nav-link active">About</a>
+                <a href="#education" class="nav-link">Education</a>
                 <a href="#thesis" class="nav-link">Thesis</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#projects" class="nav-link">Research & Projects</a>
@@ -71,6 +70,7 @@
     <div class="mobile-nav-overlay" id="mobile-nav-overlay">
         <nav class="mobile-nav-links">
             <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#education" class="mobile-nav-link">Education</a>
             <a href="#thesis" class="mobile-nav-link">Thesis Spotlight</a>
             <a href="#experience" class="mobile-nav-link">Experience</a>
             <a href="#projects" class="mobile-nav-link">Research & Projects</a>
@@ -128,52 +128,126 @@
                     <div class="profile-frame">
                         <div class="profile-glow"></div>
                         <div class="profile-image-container">
-                            <!-- High-fidelity Vector AI Mesh Graphic Placeholder -->
-                            <svg class="placeholder-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="ai-graphic-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
                                 <defs>
-                                    <radialGradient id="mesh-glow" cx="50%" cy="50%" r="50%">
+                                    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.1"/>
+                                        <stop offset="50%" stop-color="var(--accent-teal)" stop-opacity="0.8"/>
+                                        <stop offset="100%" stop-color="var(--accent-purple)" stop-opacity="1"/>
+                                    </linearGradient>
+                                    <radialGradient id="sphereGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
                                         <stop offset="0%" stop-color="var(--accent-teal)" stop-opacity="0.3"/>
+                                        <stop offset="70%" stop-color="var(--accent-purple)" stop-opacity="0.05"/>
                                         <stop offset="100%" stop-color="var(--bg-card)" stop-opacity="0"/>
                                     </radialGradient>
-                                    <linearGradient id="neural-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="var(--accent-purple)"/>
-                                        <stop offset="100%" stop-color="var(--accent-teal)"/>
-                                    </linearGradient>
+                                    <filter id="glow-intense">
+                                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur"/>
+                                            <feMergeNode in="SourceGraphic"/>
+                                        </feMerge>
+                                    </filter>
+                                    <marker id="arrow-pull" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#00f2fe" />
+                                    </marker>
+                                    <marker id="arrow-push" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff4b4b" />
+                                    </marker>
                                 </defs>
-                                <rect width="100%" height="100%" fill="var(--bg-card)" rx="20"/>
-                                <circle cx="200" cy="200" r="160" fill="url(#mesh-glow)"/>
                                 
-                                <!-- Stylized Brain/Neural Net Connections -->
-                                <g stroke="url(#neural-grad)" stroke-width="1.5" stroke-opacity="0.4" fill="none">
-                                    <path d="M100 150 C120 100, 280 100, 300 150 S 120 300, 100 150 Z" />
-                                    <path d="M130 180 C150 140, 250 140, 270 180 S 150 260, 130 180 Z" />
-                                    <path d="M200 80 L200 320 M80 200 L320 200" />
-                                    <circle cx="200" cy="200" r="60" stroke-dasharray="5,5"/>
+                                <!-- Right Side: The Hypersphere -->
+                                <g class="hypersphere" style="transform-origin: 380px 250px; animation: floatSphere 8s ease-in-out infinite;">
+                                    <circle cx="380" cy="250" r="110" fill="url(#sphereGrad)" />
+                                    <ellipse cx="380" cy="250" rx="110" ry="40" fill="none" stroke="var(--accent-teal)" stroke-opacity="0.3" stroke-width="1" />
+                                    <ellipse cx="380" cy="250" rx="40" ry="110" fill="none" stroke="var(--accent-purple)" stroke-opacity="0.3" stroke-width="1" />
+                                    <circle cx="380" cy="250" r="110" fill="none" stroke="var(--accent-teal)" stroke-opacity="0.6" stroke-width="1.5" />
+                                    
+                                    <!-- Contrastive Points & Forces -->
+                                    <g filter="url(#glow-intense)">
+                                        <!-- Anchor -->
+                                        <circle cx="320" cy="200" r="5" fill="#00f2fe" />
+                                        <!-- Positive (Pulled) -->
+                                        <circle cx="350" cy="180" r="4" fill="#00f2fe" />
+                                        <path d="M 320 200 L 343 185" stroke="#00f2fe" stroke-width="1.5" fill="none" marker-end="url(#arrow-pull)" />
+                                        
+                                        <!-- Negative (Pushed) -->
+                                        <circle cx="430" cy="300" r="5" fill="#ff4b4b" />
+                                        <path d="M 320 200 L 415 285" stroke="#ff4b4b" stroke-width="1.5" stroke-dasharray="3 3" fill="none" marker-end="url(#arrow-push)" />
+                                    </g>
+                                    
+                                    <text x="400" y="160" font-family="'Fira Code', monospace" font-size="12" fill="var(--accent-teal)" font-weight="bold">z &isin; S<tspan dy="-5" font-size="9">d-1</tspan></text>
                                 </g>
-                                
-                                <!-- Core Nodes -->
-                                <g fill="var(--accent-teal)">
-                                    <circle cx="200" cy="80" r="7" class="pulse-node-1"/>
-                                    <circle cx="200" cy="320" r="7" class="pulse-node-2"/>
-                                    <circle cx="80" cy="200" r="7" class="pulse-node-3"/>
-                                    <circle cx="320" cy="200" r="7" class="pulse-node-4"/>
-                                    <circle cx="100" cy="150" r="5"/>
-                                    <circle cx="300" cy="150" r="5"/>
-                                    <circle cx="130" cy="180" r="5"/>
-                                    <circle cx="270" cy="180" r="5"/>
+
+                                <!-- Left Side: Data & Deep Encoder -->
+                                <g class="neural-net">
+                                    <!-- Input Nodes -->
+                                    <g fill="var(--text-muted)">
+                                        <circle cx="50" cy="160" r="3" />
+                                        <circle cx="50" cy="220" r="3" />
+                                        <circle cx="50" cy="280" r="3" />
+                                        <circle cx="50" cy="340" r="3" />
+                                    </g>
+                                    
+                                    <!-- Hidden Layer 1 -->
+                                    <g fill="var(--accent-blue)">
+                                        <circle cx="110" cy="130" r="4" />
+                                        <circle cx="110" cy="190" r="4" style="animation: pulseNode 2s infinite" />
+                                        <circle cx="110" cy="250" r="4" />
+                                        <circle cx="110" cy="310" r="4" style="animation: pulseNode 3s infinite 1s" />
+                                        <circle cx="110" cy="370" r="4" />
+                                    </g>
+                                    
+                                    <!-- Hidden Layer 2 -->
+                                    <g fill="var(--accent-teal)">
+                                        <circle cx="170" cy="160" r="4" />
+                                        <circle cx="170" cy="220" r="4" />
+                                        <circle cx="170" cy="280" r="4" style="animation: pulseNode 2.5s infinite" />
+                                        <circle cx="170" cy="340" r="4" />
+                                    </g>
+                                    
+                                    <!-- Projection Bottleneck -->
+                                    <g fill="var(--accent-purple)" filter="url(#glow-intense)">
+                                        <circle cx="230" cy="200" r="5" />
+                                        <circle cx="230" cy="300" r="5" />
+                                    </g>
+
+                                    <!-- Animated Flow Lines -->
+                                    <g stroke="url(#flowGrad)" stroke-width="1.5" fill="none" opacity="0.7">
+                                        <!-- Some dense curved paths simulating deep connections -->
+                                        <path d="M50 220 C 80 220, 80 190, 110 190" style="stroke-dasharray: 6 4; animation: flowDash 3s linear infinite;" />
+                                        <path d="M50 280 C 80 280, 80 310, 110 310" style="stroke-dasharray: 6 4; animation: flowDash 3s linear infinite;" />
+                                        
+                                        <path d="M110 190 C 140 190, 140 160, 170 160" style="stroke-dasharray: 6 4; animation: flowDash 2.5s linear infinite reverse;" />
+                                        <path d="M110 310 C 140 310, 140 280, 170 280" style="stroke-dasharray: 6 4; animation: flowDash 2.5s linear infinite reverse;" />
+                                        
+                                        <path d="M170 160 C 200 160, 200 200, 230 200" style="stroke-dasharray: 10 5; animation: flowDash 2s linear infinite;" />
+                                        <path d="M170 280 C 200 280, 200 300, 230 300" style="stroke-dasharray: 10 5; animation: flowDash 2s linear infinite;" />
+                                    </g>
+                                    
+                                    <!-- Mapping to Sphere -->
+                                    <g stroke="var(--accent-purple)" stroke-width="1.5" fill="none" opacity="0.6" style="stroke-dasharray: 4 4; animation: flowDash 4s linear infinite reverse;">
+                                        <path d="M230 200 Q 280 180 310 195" />
+                                    </g>
                                 </g>
-                                <g fill="var(--accent-purple)">
-                                    <circle cx="200" cy="200" r="12" class="pulse-node-core"/>
-                                    <circle cx="200" cy="140" r="5"/>
-                                    <circle cx="200" cy="260" r="5"/>
-                                    <circle cx="140" cy="200" r="5"/>
-                                    <circle cx="260" cy="200" r="5"/>
+
+                                <!-- Mathematical Typography -->
+                                <g font-family="'Fira Code', monospace" font-size="12" fill="var(--text-primary)">
+                                    <text x="20" y="100" fill="var(--text-muted)">x <tspan font-family="sans-serif">&rarr;</tspan> Aug(x)</text>
+                                    <text x="110" y="100" fill="var(--accent-teal)">Encoder f_&theta;</text>
+                                    <text x="220" y="160" fill="var(--accent-purple)">z = f(x)/||f(x)||</text>
+                                    
+                                    <!-- InfoNCE Contrastive Loss Formula -->
+                                    <g transform="translate(130, 440)">
+                                        <text x="0" y="0" font-size="14" fill="var(--text-primary)">
+                                            L<tspan dy="3" font-size="10">CL</tspan>
+                                            <tspan dy="-3" font-size="14"> = -log</tspan>
+                                        </text>
+                                        <text x="85" y="-5" font-size="12" fill="#00f2fe">exp(sim(z, z<tspan dy="3" font-size="8">+</tspan><tspan dy="-3" font-size="12">)/&tau;)</tspan></text>
+                                        <!-- Fraction line -->
+                                        <path d="M80 3 L 240 3" stroke="var(--text-muted)" stroke-width="1" />
+                                        <text x="85" y="15" font-size="12" fill="#ff4b4b">&Sigma; exp(sim(z, z<tspan dy="3" font-size="8">-</tspan><tspan dy="-3" font-size="12">)/&tau;)</tspan></text>
+                                    </g>
                                 </g>
-                                
-                                <!-- Floating Data Particles -->
-                                <text x="140" y="240" font-family="'Fira Code', monospace" font-size="10" fill="var(--text-muted)" opacity="0.6">z = f(x) / ||f(x)||&sub2;</text>
-                                <text x="210" y="110" font-family="'Fira Code', monospace" font-size="10" fill="var(--text-muted)" opacity="0.6">z &isin; S<tspan dy="-3" font-size="7">d-1</tspan></text>
-                                <text x="50" y="290" font-family="'Fira Code', monospace" font-size="10" fill="var(--text-muted)" opacity="0.6">L_CL = -log(e<tspan dy="-3" font-size="7">sim(u,v)/&tau;</tspan><tspan dy="3"> / &Sigma; e</tspan><tspan dy="-3" font-size="7">sim(u,v&#x207B;)/&tau;</tspan><tspan dy="3">)</tspan></text>
                             </svg>
                         </div>
                     </div>
@@ -218,6 +292,42 @@
                         <div class="stat-card">
                             <div class="stat-num">End-to-End</div>
                             <div class="stat-label">Python, React, GenAI<br>& Systems Engineering</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education" class="section education-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-subtitle">Academic Background</span>
+                    <h2 class="section-title">Education</h2>
+                    <div class="section-underline"></div>
+                </div>
+                
+                <div class="education-grid reveal">
+                    <!-- M.Sc. -->
+                    <div class="edu-card">
+                        <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div class="edu-content">
+                            <span class="edu-date">04/2022 – 09/2025</span>
+                            <h3>M.Sc. International Software Systems Science</h3>
+                            <h4 class="edu-inst"><i class="fa-solid fa-university"></i> Otto-Friedrich-Universität Bamberg, Germany</h4>
+                            <p>Specialization in Deep Learning, Systems Science, and Generative AI. Thesis focused on Medical Image Analysis and Hyper-spherical Embeddings.</p>
+                            <a href="#thesis" class="edu-link">View Thesis Research <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- B.Sc. -->
+                    <div class="edu-card">
+                        <div class="edu-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                        <div class="edu-content">
+                            <span class="edu-date">08/2017 – 08/2021</span>
+                            <h3>B.Sc. Computer Science</h3>
+                            <h4 class="edu-inst"><i class="fa-solid fa-university"></i> COMSATS University, Islamabad, Pakistan</h4>
+                            <p>Foundation in Artificial Intelligence and Software Development paradigms, culminating in hands-on data science and computing projects.</p>
                         </div>
                     </div>
                 </div>
@@ -657,12 +767,13 @@
     <!-- FOOTER -->
     <footer class="footer-area">
         <div class="container footer-container">
-            <p class="footer-copyright">&copy; 2026 Muhammad Tayyab Sheikh. All rights reserved.</p>
-            <p class="footer-meta">Designed for PhD Admissions & Senior AI Roles &bull; Powered by Web Technologies</p>
+            <p class="footer-copyright">&copy; 2026 Muhammad Tayyab Sheikh.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="three-bg.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
