@@ -61,9 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const typewriterElement = document.getElementById('typewriter');
     const words = [
         "Generative AI Researcher",
-        "Deep Learning Engineer",
-        "Computer Scientist",
-        "Medical Image Specialist"
+        "Deep Learning Researcher",
+        "Representation Learning Researcher",
+        "Medical AI Researcher"
     ];
     let wordIndex = 0;
     let charIndex = 0;
