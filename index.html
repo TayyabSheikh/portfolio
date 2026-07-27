@@ -1,775 +1,408 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="day">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Optimization -->
-    <title>Muhammad Tayyab Sheikh | Generative AI & Deep Learning Researcher</title>
-    <meta name="description" content="Portfolio of Muhammad Tayyab Sheikh - Generative AI Researcher & Deep Learning Engineer specializing in Medical Image Analysis and Large Language Models. Graduate of Otto-Friedrich-Universität Bamberg.">
-    <meta name="keywords" content="Muhammad Tayyab Sheikh, AI Researcher, Deep Learning Engineer, Medical Image Analysis, Generative AI, Large Language Models, LLMs, Thesis, Bamberg University, Machine Learning Portfolio">
-    <meta name="author" content="Muhammad Tayyab Sheikh">
-    
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Muhammad Tayyab Sheikh | AI Researcher & Engineer">
-    <meta property="og:description" content="Specializing in Deep Learning, Medical Imaging, and Generative AI systems. Explore research publications, thesis work, and software development projects.">
-    <meta property="og:image" content="assets/og-image.png">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons (FontAwesome & Lucide-like custom SVGs) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Main Style Sheet -->
-    <link rel="stylesheet" href="style.css?v=2">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Muhammad Tayyab Sheikh, AI engineer and researcher</title>
+<meta name="description" content="Selected work by Muhammad Tayyab Sheikh: generalisable medical image analysis, conversational systems over business processes, and local-first AI. Bamberg, Germany.">
+<meta name="author" content="Muhammad Tayyab Sheikh">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Muhammad Tayyab Sheikh, AI engineer and researcher">
+<meta property="og:description" content="Selected work: generalisable medical image analysis, conversational systems over business processes, and local-first AI.">
+<meta property="og:url" content="https://tayyabsheikh.github.io/portfolio/">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23FAF8F4'/><circle cx='16' cy='16' r='9.5' fill='none' stroke='%2316161A' stroke-width='1.25'/><circle cx='12' cy='12' r='2.6' fill='%23C4402C'/></svg>">
+
+<!-- Set the edition before first paint so there is no flash. -->
+<script>
+    (function () {
+        try {
+            var saved = localStorage.getItem('edition');
+            if (saved === 'night' || saved === 'day') {
+                document.documentElement.setAttribute('data-theme', saved);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'night');
+            }
+        } catch (e) {}
+    })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
-    <!-- 3D WebGL Background Container -->
-    <div id="webgl-container"></div>
+<!-- Arrowheads, shared by every diagram on the page. -->
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+    <defs>
+        <marker id="ar-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 Z" class="fill-ink"/>
+        </marker>
+        <marker id="ar-accent" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 Z" class="fill-accent"/>
+        </marker>
+        <marker id="ar-graphite" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 Z" class="fill-graphite"/>
+        </marker>
+    </defs>
+</svg>
 
-    <!-- Floating Navigation Bar -->
-    <header class="header">
-        <div class="nav-container">
-            <a href="#hero" class="logo" id="nav-logo">
-                <span class="logo-accent">&lt;</span>Tayyab<span class="logo-accent">.AI /&gt;</span>
-            </a>
-            
-            <nav class="nav-links" id="nav-links-container">
-                <a href="#about" class="nav-link active">About</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#thesis" class="nav-link">Thesis</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Research & Projects</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#connect" class="nav-link connect-btn">Connect</a>
-            </nav>
-            
-            <div class="nav-actions">
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle visual theme">
-                    <i class="fa-solid fa-moon moon-icon"></i>
-                    <i class="fa-solid fa-sun sun-icon"></i>
-                </button>
-                
-                <!-- Mobile Navigation Menu Toggle -->
-                <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </div>
-        </div>
-    </header>
+<header class="masthead">
+    <div class="wrap masthead__inner">
+        <a href="#" class="masthead__name">Sheikh</a>
 
-    <!-- Mobile Nav Overlay -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-        <nav class="mobile-nav-links">
-            <a href="#about" class="mobile-nav-link">About</a>
-            <a href="#education" class="mobile-nav-link">Education</a>
-            <a href="#thesis" class="mobile-nav-link">Thesis Spotlight</a>
-            <a href="#experience" class="mobile-nav-link">Experience</a>
-            <a href="#projects" class="mobile-nav-link">Research & Projects</a>
-            <a href="#skills" class="mobile-nav-link">Skills Matrix</a>
-            <a href="#connect" class="mobile-nav-link">Connect</a>
+        <nav class="masthead__nav" aria-label="Sections">
+            <a href="#work-01" class="folio">01</a>
+            <a href="#work-02" class="folio">02</a>
+            <a href="#work-03" class="folio">03</a>
+            <span class="masthead__rule" aria-hidden="true"></span>
+            <button id="edition-toggle" class="edition" type="button" aria-label="Switch between the day and night edition">
+                <span class="edition__night">Night</span>
+                <span class="edition__day">Day</span>
+            </button>
         </nav>
     </div>
+</header>
 
-    <!-- Main Container -->
-    <main>
-        
-        <!-- HERO SECTION -->
-        <section id="hero" class="section hero-section">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <div class="hero-badge reveal" id="hero-badge-tag">
-                        <span class="badge-dot"></span>
-                        <span>Available for PhD & AI Research Roles</span>
-                    </div>
-                    
-                    <h1 class="hero-title reveal">
-                        Hi, I'm <span class="name-gradient">Muhammad Tayyab Sheikh</span>
-                    </h1>
-                    
-                    <h2 class="hero-subtitle reveal">
-                        I am a&nbsp;<span id="typewriter" class="typewriter-text"></span><span class="typewriter-cursor">|</span>
-                    </h2>
-                    
-                    <p class="hero-description reveal">
-                        Generative AI and Deep Learning researcher with a focus on <strong>Medical Image Analysis</strong> and <strong>Large Language Models</strong>. M.Sc. from the University of Bamberg; industry experience building LLM agents at T-Systems and Masoona Consulting.
-                    </p>
-                    
-                    <div class="hero-ctas reveal">
-                        <a href="#thesis" class="btn btn-primary">
-                            <span>Explore Research</span>
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </a>
-                        <a href="#connect" class="btn btn-secondary">
-                            <span>Get in Touch</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    
-                    <div class="hero-socials reveal">
-                        <a href="https://github.com/TayyabSheikh" target="_blank" rel="noopener" class="social-icon-link" aria-label="GitHub Profile">
-                            <i class="fa-brands fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/tayyabsheikh/" target="_blank" rel="noopener" class="social-icon-link" aria-label="LinkedIn Profile">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hero-graphics reveal">
-                    <div class="profile-frame">
-                        <div class="profile-glow"></div>
-                        <div class="profile-image-container">
-                            <svg class="ai-graphic-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-                                <defs>
-                                    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.1"/>
-                                        <stop offset="50%" stop-color="var(--accent-teal)" stop-opacity="0.8"/>
-                                        <stop offset="100%" stop-color="var(--accent-purple)" stop-opacity="1"/>
-                                    </linearGradient>
-                                    <radialGradient id="sphereGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
-                                        <stop offset="0%" stop-color="var(--accent-teal)" stop-opacity="0.3"/>
-                                        <stop offset="70%" stop-color="var(--accent-purple)" stop-opacity="0.05"/>
-                                        <stop offset="100%" stop-color="var(--bg-card)" stop-opacity="0"/>
-                                    </radialGradient>
-                                    <filter id="glow-intense">
-                                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                                        <feMerge>
-                                            <feMergeNode in="coloredBlur"/>
-                                            <feMergeNode in="SourceGraphic"/>
-                                        </feMerge>
-                                    </filter>
-                                    <marker id="arrow-pull" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#00f2fe" />
-                                    </marker>
-                                    <marker id="arrow-push" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff4b4b" />
-                                    </marker>
-                                </defs>
-                                
-                                <!-- Right Side: The Hypersphere -->
-                                <g class="hypersphere" style="transform-origin: 380px 250px; animation: floatSphere 8s ease-in-out infinite;">
-                                    <circle cx="380" cy="250" r="110" fill="url(#sphereGrad)" />
-                                    <ellipse cx="380" cy="250" rx="110" ry="40" fill="none" stroke="var(--accent-teal)" stroke-opacity="0.3" stroke-width="1" />
-                                    <ellipse cx="380" cy="250" rx="40" ry="110" fill="none" stroke="var(--accent-purple)" stroke-opacity="0.3" stroke-width="1" />
-                                    <circle cx="380" cy="250" r="110" fill="none" stroke="var(--accent-teal)" stroke-opacity="0.6" stroke-width="1.5" />
-                                    
-                                    <!-- Contrastive Points & Forces -->
-                                    <g filter="url(#glow-intense)">
-                                        <!-- Anchor -->
-                                        <circle cx="320" cy="200" r="5" fill="#00f2fe" />
-                                        <!-- Positive (Pulled) -->
-                                        <circle cx="350" cy="180" r="4" fill="#00f2fe" />
-                                        <path d="M 320 200 L 343 185" stroke="#00f2fe" stroke-width="1.5" fill="none" marker-end="url(#arrow-pull)" />
-                                        
-                                        <!-- Negative (Pushed) -->
-                                        <circle cx="430" cy="300" r="5" fill="#ff4b4b" />
-                                        <path d="M 320 200 L 415 285" stroke="#ff4b4b" stroke-width="1.5" stroke-dasharray="3 3" fill="none" marker-end="url(#arrow-push)" />
-                                    </g>
-                                    
-                                    <text x="400" y="160" font-family="'Fira Code', monospace" font-size="12" fill="var(--accent-teal)" font-weight="bold">z &isin; S<tspan dy="-5" font-size="9">d-1</tspan></text>
-                                </g>
+<main>
 
-                                <!-- Left Side: Data & Deep Encoder -->
-                                <g class="neural-net">
-                                    <!-- Input Nodes -->
-                                    <g fill="var(--text-muted)">
-                                        <circle cx="50" cy="160" r="3" />
-                                        <circle cx="50" cy="220" r="3" />
-                                        <circle cx="50" cy="280" r="3" />
-                                        <circle cx="50" cy="340" r="3" />
-                                    </g>
-                                    
-                                    <!-- Hidden Layer 1 -->
-                                    <g fill="var(--accent-blue)">
-                                        <circle cx="110" cy="130" r="4" />
-                                        <circle cx="110" cy="190" r="4" style="animation: pulseNode 2s infinite" />
-                                        <circle cx="110" cy="250" r="4" />
-                                        <circle cx="110" cy="310" r="4" style="animation: pulseNode 3s infinite 1s" />
-                                        <circle cx="110" cy="370" r="4" />
-                                    </g>
-                                    
-                                    <!-- Hidden Layer 2 -->
-                                    <g fill="var(--accent-teal)">
-                                        <circle cx="170" cy="160" r="4" />
-                                        <circle cx="170" cy="220" r="4" />
-                                        <circle cx="170" cy="280" r="4" style="animation: pulseNode 2.5s infinite" />
-                                        <circle cx="170" cy="340" r="4" />
-                                    </g>
-                                    
-                                    <!-- Projection Bottleneck -->
-                                    <g fill="var(--accent-purple)" filter="url(#glow-intense)">
-                                        <circle cx="230" cy="200" r="5" />
-                                        <circle cx="230" cy="300" r="5" />
-                                    </g>
-
-                                    <!-- Animated Flow Lines -->
-                                    <g stroke="url(#flowGrad)" stroke-width="1.5" fill="none" opacity="0.7">
-                                        <!-- Some dense curved paths simulating deep connections -->
-                                        <path d="M50 220 C 80 220, 80 190, 110 190" style="stroke-dasharray: 6 4; animation: flowDash 3s linear infinite;" />
-                                        <path d="M50 280 C 80 280, 80 310, 110 310" style="stroke-dasharray: 6 4; animation: flowDash 3s linear infinite;" />
-                                        
-                                        <path d="M110 190 C 140 190, 140 160, 170 160" style="stroke-dasharray: 6 4; animation: flowDash 2.5s linear infinite reverse;" />
-                                        <path d="M110 310 C 140 310, 140 280, 170 280" style="stroke-dasharray: 6 4; animation: flowDash 2.5s linear infinite reverse;" />
-                                        
-                                        <path d="M170 160 C 200 160, 200 200, 230 200" style="stroke-dasharray: 10 5; animation: flowDash 2s linear infinite;" />
-                                        <path d="M170 280 C 200 280, 200 300, 230 300" style="stroke-dasharray: 10 5; animation: flowDash 2s linear infinite;" />
-                                    </g>
-                                    
-                                    <!-- Mapping to Sphere -->
-                                    <g stroke="var(--accent-purple)" stroke-width="1.5" fill="none" opacity="0.6" style="stroke-dasharray: 4 4; animation: flowDash 4s linear infinite reverse;">
-                                        <path d="M230 200 Q 280 180 310 195" />
-                                    </g>
-                                </g>
-
-                                <!-- Mathematical Typography -->
-                                <g font-family="'Fira Code', monospace" font-size="12" fill="var(--text-primary)">
-                                    <text x="20" y="100" fill="var(--text-muted)">x <tspan font-family="sans-serif">&rarr;</tspan> Aug(x)</text>
-                                    <text x="110" y="100" fill="var(--accent-teal)">Encoder f_&theta;</text>
-                                    <text x="220" y="160" fill="var(--accent-purple)">z = f(x)/||f(x)||</text>
-                                    
-                                    <!-- InfoNCE Contrastive Loss Formula -->
-                                    <g transform="translate(130, 440)">
-                                        <text x="0" y="0" font-size="14" fill="var(--text-primary)">
-                                            L<tspan dy="3" font-size="10">CL</tspan>
-                                            <tspan dy="-3" font-size="14"> = -log</tspan>
-                                        </text>
-                                        <text x="85" y="-5" font-size="12" fill="#00f2fe">exp(sim(z, z<tspan dy="3" font-size="8">+</tspan><tspan dy="-3" font-size="12">)/&tau;)</tspan></text>
-                                        <!-- Fraction line -->
-                                        <path d="M80 3 L 240 3" stroke="var(--text-muted)" stroke-width="1" />
-                                        <text x="85" y="15" font-size="12" fill="#ff4b4b">&Sigma; exp(sim(z, z<tspan dy="3" font-size="8">-</tspan><tspan dy="-3" font-size="12">)/&tau;)</tspan></text>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ABOUT SECTION -->
-        <section id="about" class="section about-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">Profile Overview</span>
-                    <h2 class="section-title">About Me</h2>
-                    <div class="section-underline"></div>
-                </div>
-                
-                <div class="about-grid reveal">
-                    <div class="about-card intro-card">
-                        <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
-                        <h3>Background</h3>
-                        <p>
-                            I completed my M.Sc. in <strong>International Software Systems Science</strong> at the <strong>University of Bamberg, Germany</strong>, where my research focused on deep learning for medical image classification — specifically, contrastive learning on hyper-spherical embedding spaces. My proposed augmentation strategy (MedAugmix) achieved 0.913 OOD accuracy on the Camelyon17 benchmark, a +6pp improvement over the baseline.
-                        </p>
-                        <p>
-                            In industry, I have worked as a <strong>Generative AI Researcher</strong> at Masoona Consulting, building LLM-based agents for business process automation, and as an <strong>AI Research Intern</strong> at T-Systems International, developing RAG pipelines for financial reporting workflows.
-                        </p>
-                    </div>
-                    
-                    <div class="about-quick-stats">
-                        <div class="stat-card">
-                            <div class="stat-num">M.Sc.</div>
-                            <div class="stat-label">Software Systems Science<br><small>Otto-Friedrich-Universität Bamberg</small></div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-num">2 Roles</div>
-                            <div class="stat-label">AI Research Positions<br>in Germany</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-num">Thesis</div>
-                            <div class="stat-label">Medical Image Analysis<br>& Contrastive Learning</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-num">Stack</div>
-                            <div class="stat-label">Python · PyTorch · React<br>· LangChain</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EDUCATION SECTION -->
-        <section id="education" class="section education-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">Academic Background</span>
-                    <h2 class="section-title">Education</h2>
-                    <div class="section-underline"></div>
-                </div>
-                
-                <div class="education-grid reveal">
-                    <!-- M.Sc. -->
-                    <div class="edu-card">
-                        <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <div class="edu-content">
-                            <span class="edu-date">04/2022 – 09/2025</span>
-                            <h3>M.Sc. International Software Systems Science</h3>
-                            <h4 class="edu-inst"><i class="fa-solid fa-university"></i> Otto-Friedrich-Universität Bamberg, Germany</h4>
-                            <p>Coursework in deep learning, systems science, and statistical methods. Thesis: <em>Evaluating Hyper-spherical Embeddings and Targeted Augmentations for Medical Image Analysis</em>, supervised at the Chair of Explainable Machine Learning.</p>
-                            <a href="#thesis" class="edu-link">View Thesis Research <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- B.Sc. -->
-                    <div class="edu-card">
-                        <div class="edu-icon"><i class="fa-solid fa-user-graduate"></i></div>
-                        <div class="edu-content">
-                            <span class="edu-date">08/2017 – 08/2021</span>
-                            <h3>B.Sc. Computer Science</h3>
-                            <h4 class="edu-inst"><i class="fa-solid fa-university"></i> COMSATS University, Islamabad, Pakistan</h4>
-                            <p>Coursework in algorithms, data structures, AI fundamentals, and software engineering. Capstone: end-to-end computer vision tool for object detection and image super-resolution (Python, TensorFlow, React).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- THESIS SPOTLIGHT SECTION -->
-        <section id="thesis" class="section thesis-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">Academic Spotlight</span>
-                    <h2 class="section-title">Master's Thesis Research</h2>
-                    <div class="section-underline"></div>
-                </div>
-                
-                <div class="thesis-wrapper reveal">
-                    <!-- Main Academic Spotlight Card -->
-                    <div class="thesis-main-card">
-                        <div class="thesis-header-glow"></div>
-                        <div class="thesis-meta">
-                            <span class="academic-tag"><i class="fa-solid fa-graduation-cap"></i> M.Sc. Thesis Project</span>
-                            <span class="status-tag submission-status"><i class="fa-solid fa-circle-check"></i> Submitted</span>
-                        </div>
-                        
-                        <h3 class="thesis-title">
-                            <a href="https://www.uni-bamberg.de/fileadmin/xai/studies/theses/2025/2025_Masterthesis_Sheikh.pdf" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">
-                                Evaluating Hyper-spherical Embeddings and Targeted Augmentations for Medical Image Analysis <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8em; color: var(--accent-teal); margin-left: 0.25rem;"></i>
-                            </a>
-                        </h3>
-                        
-                        <div class="institution-details">
-                            <div class="inst-logo-placeholder">
-                                <i class="fa-solid fa-university"></i>
-                            </div>
-                            <div class="inst-text">
-                                <strong>Otto-Friedrich-Universität Bamberg</strong>
-                                <span>Bamberg, Germany &bull; Chair of Explainable Machine Learning</span>
-                            </div>
-                        </div>
-                        
-                        <p class="thesis-abstract">
-                            <strong>Abstract:</strong> Medical image classification faces challenges including limited labeled data, class imbalance, and domain shift across clinical sites. This thesis investigates whether projecting learned representations onto hyper-spherical manifolds (S<sup>d-1</sup>), combined with domain-specific augmentations, can improve classification robustness. Evaluated on <strong>WILDS Camelyon17</strong> (histopathology, inter-hospital variability) and <strong>Fitzpatrick17k</strong> (dermatology, skin tone bias), using <strong>MedMNIST-C</strong> corruptions for targeted augmentation design. The proposed MedAugmix strategy achieved <strong>0.913 OOD accuracy</strong> on Camelyon17, a +6.0pp improvement over the ERM baseline (0.853), consistently outperforming all specialized HYPO configurations.
-                        </p>
-                        
-                        <div class="thesis-highlights-grid">
-                            <div class="highlight-item">
-                                <div class="hl-icon"><i class="fa-solid fa-chart-line"></i></div>
-                                <div>
-                                    <h4>Hyper-spherical Spaces</h4>
-                                    <p>Projected CNN features onto S<sup>d-1</sup> via contrastive objectives to enforce angular separation between classes, improving intra-class compactness and inter-class distance.</p>
-                                </div>
-                            </div>
-                            <div class="highlight-item">
-                                <div class="hl-icon"><i class="fa-solid fa-sliders"></i></div>
-                                <div>
-                                    <h4>MedAugmix Strategy</h4>
-                                    <p>Developed augmentation strategies using MedMNIST-C corruptions that simulate clinically relevant variations (stain shifts, morphological transforms) to improve performance on under-represented classes.</p>
-                                </div>
-                            </div>
-                            <div class="highlight-item">
-                                <div class="hl-icon"><i class="fa-solid fa-stethoscope"></i></div>
-                                <div>
-                                    <h4>Clinical Benchmarks</h4>
-                                    <p>Benchmarked on Camelyon17 (histopathology) and Fitzpatrick17k (dermatology) with evaluation of OOD accuracy, calibration, and robustness to distribution shift.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="thesis-tech-pills">
-                            <span class="tech-pill">Deep Learning</span>
-                            <span class="tech-pill">Contrastive Learning</span>
-                            <span class="tech-pill">Hyper-spherical Embeddings</span>
-                            <span class="tech-pill">Computer Vision</span>
-                            <span class="tech-pill">PyTorch / TensorFlow</span>
-                            <span class="tech-pill">Medical Diagnostics</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EXPERIENCE TIMELINE SECTION -->
-        <section id="experience" class="section experience-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">Professional Path</span>
-                    <h2 class="section-title">AI & Software Engineering Experience</h2>
-                    <div class="section-underline"></div>
-                </div>
-                
-                <div class="timeline-container reveal">
-                    <div class="timeline-line"></div>
-                    
-                    <!-- Item 1: Masoona -->
-                    <div class="timeline-item left">
-                        <div class="timeline-dot"><i class="fa-solid fa-circle-nodes"></i></div>
-                        <div class="timeline-card">
-                            <div class="timeline-header">
-                                <span class="role-duration">09/2024 - Present</span>
-                                <h3 class="role-title">Generative AI Researcher</h3>
-                                <h4 class="company-name"><i class="fa-solid fa-briefcase"></i> Masoona Consulting GmbH, Nuremberg, Germany</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>Researching and prototyping AI integration into business process management (BPMN) workflows. Working across teams and domains to identify automation opportunities.</p>
-                                <ul>
-                                    <li>Building modular LLM-based agents that parse, execute, and optimize BPMN process definitions.</li>
-                                    <li>Designing multi-agent architectures with structured prompting (Chain of Thought, self-reflection) for automated decision workflows.</li>
-                                    <li>Evaluating retrieval-augmented generation approaches for grounding agent outputs in organizational knowledge bases.</li>
-                                </ul>
-                                <div class="timeline-tags">
-                                    <span class="timeline-tag">Generative AI</span>
-                                    <span class="timeline-tag">LLMs</span>
-                                    <span class="timeline-tag">BPMN</span>
-                                    <span class="timeline-tag">LangChain</span>
-                                    <span class="timeline-tag">Python</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 2: T-Systems -->
-                    <div class="timeline-item right">
-                        <div class="timeline-dot"><i class="fa-solid fa-circle-nodes"></i></div>
-                        <div class="timeline-card">
-                            <div class="timeline-header">
-                                <span class="role-duration">03/2024 - 08/2024</span>
-                                <h3 class="role-title">AI Research Intern</h3>
-                                <h4 class="company-name"><i class="fa-solid fa-briefcase"></i> T-Systems International, Berlin, Germany</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>Developed LLM-powered tools for financial reporting automation as part of the Chief Tomorrow Officer internship program.</p>
-                                <ul>
-                                    <li>Built a retrieval-augmented generation (RAG) pipeline using LlamaIndex to automate financial analysis report generation for <strong>Finance Controlling</strong>.</li>
-                                    <li>Collaborated with finance controllers to define requirements and validate outputs against existing manual workflows.</li>
-                                    <li>Presented the final proof-of-concept to the CTO, who approved the project for further development beyond the internship.</li>
-                                </ul>
-                                <div class="timeline-tags">
-                                    <span class="timeline-tag">LlamaIndex</span>
-                                    <span class="timeline-tag">Retrieval-Augmented Gen</span>
-                                    <span class="timeline-tag">Finance Tech</span>
-                                    <span class="timeline-tag">Prompt Engineering</span>
-                                    <span class="timeline-tag">Enterprise AI</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Item 3: OneScreen -->
-                    <div class="timeline-item left">
-                        <div class="timeline-dot"><i class="fa-solid fa-circle-nodes"></i></div>
-                        <div class="timeline-card">
-                            <div class="timeline-header">
-                                <span class="role-duration">10/2021 - 04/2022</span>
-                                <h3 class="role-title">Software Developer</h3>
-                                <h4 class="company-name"><i class="fa-solid fa-briefcase"></i> OneScreen, Islamabad, Pakistan</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>Developed frontend features and API integrations for a large-scale e-learning platform.</p>
-                                <ul>
-                                    <li>Built user-facing modules and dashboards using React with Redux state management, served by a Ruby on Rails API.</li>
-                                    <li>Improved page load performance through database query optimization and asset delivery tuning.</li>
-                                    <li>Collaborated with UX designers to implement a shared component library and responsive layouts.</li>
-                                </ul>
-                                <div class="timeline-tags">
-                                    <span class="timeline-tag">React</span>
-                                    <span class="timeline-tag">Ruby on Rails</span>
-                                    <span class="timeline-tag">RESTful APIs</span>
-                                    <span class="timeline-tag">Web Development</span>
-                                    <span class="timeline-tag">Redux</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- RESEARCH PROJECTS & SEMINARS -->
-        <section id="projects" class="section projects-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">Portfolios & Reports</span>
-                    <h2 class="section-title">Research Seminars & Key Projects</h2>
-                    <div class="section-underline"></div>
-                    
-                    <!-- Filtering controls -->
-                    <div class="filter-controls">
-                        <button class="filter-btn active" data-filter="all">All Projects</button>
-                        <button class="filter-btn" data-filter="ai-research">AI & Scientific Research</button>
-                        <button class="filter-btn" data-filter="software">Software Engineering</button>
-                    </div>
-                </div>
-                
-                <div class="projects-grid reveal">
-                    
-                    <!-- Seminar Item -->
-                    <div class="project-card" data-category="ai-research">
-                        <div class="project-banner bg-gradient-purple">
-                            <div class="proj-badge"><i class="fa-solid fa-book-open"></i> Seminar Thesis</div>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Chain of Thought Prompting in Large Language Models</h3>
-                            <p class="project-description">
-                                Surveyed Chain of Thought prompting methods (CoT, Self-Consistency, Tree of Thought) and their effect on LLM reasoning performance in mathematical and symbolic tasks. Wrote a scientific report comparing prompting strategies across multiple benchmarks.
-                            </p>
-                            <div class="project-tags">
-                                <span class="proj-tag">LLMs</span>
-                                <span class="proj-tag">Prompting Methodology</span>
-                                <span class="proj-tag">Reasoning Systems</span>
-                                <span class="proj-tag">Scientific Report</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Image Analysis Tool -->
-                    <div class="project-card" data-category="software">
-                        <div class="project-banner bg-gradient-teal">
-                            <div class="proj-badge"><i class="fa-solid fa-code"></i> Capstone Project</div>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Image Analysis Automation Tool</h3>
-                            <p class="project-description">
-                                Built a computer vision web application supporting object detection, action recognition, and image super-resolution. Backend inference in Python/TensorFlow, REST API via Node.js, frontend dashboard in React.
-                            </p>
-                            <div class="project-tags">
-                                <span class="proj-tag">React</span>
-                                <span class="proj-tag">Python</span>
-                                <span class="proj-tag">TensorFlow</span>
-                                <span class="proj-tag">Node.js</span>
-                                <span class="proj-tag">Computer Vision</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Smart City Bamberg -->
-                    <div class="project-card" data-category="ai-research">
-                        <div class="project-banner bg-gradient-blue">
-                            <div class="proj-badge"><i class="fa-solid fa-network-wired"></i> Joint Research</div>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Smart City Bamberg Sensor Initiative</h3>
-                            <p class="project-description">
-                                Research collaboration with Washington University and the City of Bamberg analyzing IoT sensor data (pedestrian counters, environmental sensors) to model urban foot traffic patterns and inform municipal planning decisions.
-                            </p>
-                            <div class="project-tags">
-                                <span class="proj-tag">Data Analysis</span>
-                                <span class="proj-tag">IoT Analytics</span>
-                                <span class="proj-tag">Systems Science</span>
-                                <span class="proj-tag">Urban Computing</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- RESEARCH INTERESTS & EXPERTISE SECTION -->
-        <section id="skills" class="section expertise-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">What I Work On</span>
-                    <h2 class="section-title">Research Interests & Expertise</h2>
-                    <div class="section-underline"></div>
-                </div>
-                
-                <div class="expertise-grid reveal">
-                    
-                    <!-- Domain 1: Medical Image Analysis -->
-                    <div class="expertise-card featured">
-                        <div class="expertise-icon-wrap">
-                            <i class="fa-solid fa-stethoscope"></i>
-                        </div>
-                        <h3>Medical Image Analysis</h3>
-                        <p>
-                            My thesis investigated how <strong>hyper-spherical contrastive learning</strong> and targeted augmentations (MedAugmix) can improve classification robustness in low-data medical imaging settings. Evaluated on Camelyon17 and Fitzpatrick17k using PyTorch.
-                        </p>
-                        <div class="expertise-context">
-                            <span class="context-label">Where I applied this</span>
-                            <span class="context-ref">M.Sc. Thesis — Bamberg</span>
-                        </div>
-                        <div class="expertise-tools">
-                            <span>PyTorch</span>
-                            <span>TensorFlow</span>
-                            <span>Computer Vision</span>
-                            <span>Contrastive Learning</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Domain 2: LLMs & Generative AI -->
-                    <div class="expertise-card featured">
-                        <div class="expertise-icon-wrap">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <h3>Large Language Models & Generative AI</h3>
-                        <p>
-                            I build LLM-powered multi-agent systems for business process automation. My work covers prompt engineering (Chain of Thought, self-reflection), RAG pipelines, and custom agent architectures using LangChain and LlamaIndex.
-                        </p>
-                        <div class="expertise-context">
-                            <span class="context-label">Where I applied this</span>
-                            <span class="context-ref">Masoona Consulting · T-Systems International</span>
-                        </div>
-                        <div class="expertise-tools">
-                            <span>LangChain</span>
-                            <span>LlamaIndex</span>
-                            <span>RAG Pipelines</span>
-                            <span>ChatGPT / GPT APIs</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Domain 3: Representation Learning -->
-                    <div class="expertise-card">
-                        <div class="expertise-icon-wrap">
-                            <i class="fa-solid fa-diagram-project"></i>
-                        </div>
-                        <h3>Deep Representation Learning</h3>
-                        <p>
-                            I study how neural networks learn and organize internal representations — particularly <strong>geometric constraints on embedding spaces</strong> (hyperspheres, metric learning) and their effect on robustness and calibration.
-                        </p>
-                        <div class="expertise-context">
-                            <span class="context-label">Where I applied this</span>
-                            <span class="context-ref">M.Sc. Thesis · Seminar Research</span>
-                        </div>
-                        <div class="expertise-tools">
-                            <span>Metric Learning</span>
-                            <span>Embedding Spaces</span>
-                            <span>Self-Supervised Learning</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Domain 4: AI for Business Process Automation -->
-                    <div class="expertise-card">
-                        <div class="expertise-icon-wrap">
-                            <i class="fa-solid fa-gears"></i>
-                        </div>
-                        <h3>AI-Driven Process Automation</h3>
-                        <p>
-                            At Masoona Consulting, I research how to embed AI capabilities directly into <strong>business process management (BPMN)</strong> workflows — building systems that parse process definitions, reason about execution paths, and optimize organizational workflows using LLM-based agents.
-                        </p>
-                        <div class="expertise-context">
-                            <span class="context-label">Where I applied this</span>
-                            <span class="context-ref">Masoona Consulting GmbH</span>
-                        </div>
-                        <div class="expertise-tools">
-                            <span>BPMN</span>
-                            <span>Multi-Agent Systems</span>
-                            <span>Python</span>
-                            <span>Enterprise AI</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Domain 5: End-to-End Applied AI -->
-                    <div class="expertise-card">
-                        <div class="expertise-icon-wrap">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <h3>End-to-End Applied AI</h3>
-                        <p>
-                            I build complete systems from ML model to deployed application — React frontends, Python inference backends, containerized deployments. My capstone project and OneScreen role both involved shipping user-facing AI-integrated products.
-                        </p>
-                        <div class="expertise-context">
-                            <span class="context-label">Where I applied this</span>
-                            <span class="context-ref">Image Analysis Tool · OneScreen</span>
-                        </div>
-                        <div class="expertise-tools">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>Docker</span>
-                            <span>Ruby on Rails</span>
-                            <span>REST APIs</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Domain 6: IoT & Urban Computing -->
-                    <div class="expertise-card">
-                        <div class="expertise-icon-wrap">
-                            <i class="fa-solid fa-city"></i>
-                        </div>
-                        <h3>IoT & Urban Computing</h3>
-                        <p>
-                            Analyzed pedestrian flow and environmental sensor data from the Smart City Bamberg sensor network, in collaboration with Washington University, to support urban planning and energy management decisions.
-                        </p>
-                        <div class="expertise-context">
-                            <span class="context-label">Where I applied this</span>
-                            <span class="context-ref">Smart City Bamberg · Washington University</span>
-                        </div>
-                        <div class="expertise-tools">
-                            <span>Data Analysis</span>
-                            <span>Sensor Networks</span>
-                            <span>Pandas</span>
-                            <span>Systems Science</span>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <!-- CONNECT SECTION -->
-        <section id="connect" class="section connect-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-subtitle">Get in Touch</span>
-                    <h2 class="section-title">Connect</h2>
-                    <div class="section-underline"></div>
-                </div>
-                
-                <div class="connect-centered reveal">
-                    <div class="connect-cards-row">
-                        <a href="https://www.linkedin.com/in/tayyabsheikh/" target="_blank" rel="noopener" class="connect-link-card">
-                            <div class="conn-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-                            <div class="conn-text">
-                                <h4>LinkedIn</h4>
-                                <span>Let's connect professionally</span>
-                            </div>
-                            <div class="conn-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                        </a>
-                        
-                        <a href="https://github.com/TayyabSheikh" target="_blank" rel="noopener" class="connect-link-card">
-                            <div class="conn-icon"><i class="fa-brands fa-github"></i></div>
-                            <div class="conn-text">
-                                <h4>GitHub</h4>
-                                <span>View my code &amp; projects</span>
-                            </div>
-                            <div class="conn-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer-area">
-        <div class="container footer-container">
-            <p class="footer-copyright">&copy; 2026 Muhammad Tayyab Sheikh.</p>
+    <section class="wrap opening">
+        <div class="slug">
+            <span>Selected work</span>
+            <span>2022&ndash;2026</span>
         </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="three-bg.js?v=2"></script>
-    <script src="script.js?v=2"></script>
+        <h1 class="opening__display">Results tell you a model works. Structure tells you when it won&rsquo;t.</h1>
+
+        <p class="lede opening__lede">
+            Which is why I work on the structure: how a representation arranges itself, what
+            that arrangement survives, and where it gives out once the data shifts underneath
+            it. A different hospital, a different scanner, a different population. Lately I
+            have been asking the same of language models in production.
+        </p>
+
+        <div class="byline">
+            <p class="byline__name">Muhammad Tayyab Sheikh</p>
+            <p class="byline__role">AI engineer and researcher &middot; Bamberg, Germany</p>
+        </div>
+    </section>
+
+    <figure class="wrap figure">
+        <figcaption class="figure__caption">
+            <span class="figure__label">Fig. 1</span>
+            <p class="figure__text">
+                A contrastive objective on the unit hypersphere. The anchor pulls its
+                positive pair inward and pushes negatives away, until the representation
+                spreads across the surface rather than collapsing into it.
+                <strong>A constraint, not a result:</strong> the model is not free to
+                arrange itself the way that would simply score best.
+            </p>
+        </figcaption>
+
+        <div class="figure__frame">
+            <canvas id="fig-sphere" role="img"
+                    aria-label="Points distributed in clusters on the surface of a slowly rotating sphere. One point is marked as an anchor, with a solid line pulling a positive pair toward it and dashed lines pushing two negatives away."></canvas>
+        </div>
+    </figure>
+
+
+    <!-- ===== 01 ============================================== -->
+
+    <section id="work-01" class="work">
+        <div class="wrap">
+            <div class="slug">
+                <span>01 &middot; Master&rsquo;s thesis</span>
+                <span>Bamberg, 2025</span>
+            </div>
+
+            <h2 class="work__title">What survives the move between hospitals</h2>
+
+            <p class="lede work__lede">
+                My thesis at the Chair of Explainable Machine Learning asked a narrow question
+                with a wide blast radius. When a medical imaging model meets data from a
+                hospital it was never trained on, which part of what it learned still holds?
+            </p>
+        </div>
+
+        <figure class="wrap figure">
+            <figcaption class="figure__caption">
+                <span class="figure__label">Fig. 2</span>
+                <p class="figure__text">
+                    Coverage, not accuracy. A model trained on one hospital fails on an unseen
+                    one because the two distributions barely meet. Targeted augmentation widens
+                    what the model has effectively already seen until it reaches into the
+                    unseen one. <strong>Nothing about the architecture changes.</strong>
+                </p>
+            </figcaption>
+
+            <div class="figure__frame figure__frame--diagram">
+                <svg class="fig-svg" viewBox="0 0 560 330" role="img"
+                     aria-label="Three overlapping distributions. A small solid ellipse marks the training hospital. A much larger dashed ellipse marks the coverage gained through targeted augmentation. A third ellipse to the right marks an unseen hospital, which the training distribution does not reach but the augmented coverage does.">
+                    <ellipse cx="238" cy="168" rx="196" ry="122" class="s-accent dash"/>
+                    <ellipse cx="172" cy="180" rx="88" ry="68" class="s-ink"/>
+                    <ellipse cx="428" cy="146" rx="86" ry="64" class="s-graphite"/>
+
+                    <g class="dot-ink">
+                        <circle cx="140" cy="158" r="2.6"/><circle cx="165" cy="172" r="2.6"/>
+                        <circle cx="192" cy="152" r="2.6"/><circle cx="205" cy="188" r="2.6"/>
+                        <circle cx="150" cy="200" r="2.6"/><circle cx="178" cy="205" r="2.6"/>
+                        <circle cx="200" cy="168" r="2.6"/><circle cx="128" cy="182" r="2.6"/>
+                        <circle cx="160" cy="140" r="2.6"/><circle cx="210" cy="206" r="2.6"/>
+                        <circle cx="142" cy="218" r="2.6"/><circle cx="190" cy="222" r="2.6"/>
+                    </g>
+
+                    <g class="dot-graphite">
+                        <circle cx="400" cy="126" r="2.6"/><circle cx="428" cy="142" r="2.6"/>
+                        <circle cx="452" cy="158" r="2.6"/><circle cx="415" cy="168" r="2.6"/>
+                        <circle cx="442" cy="120" r="2.6"/><circle cx="468" cy="148" r="2.6"/>
+                        <circle cx="392" cy="158" r="2.6"/><circle cx="432" cy="108" r="2.6"/>
+                        <circle cx="462" cy="180" r="2.6"/><circle cx="405" cy="186" r="2.6"/>
+                    </g>
+
+                    <path d="M172 104 V 110" class="s-hair"/>
+                    <text x="172" y="98" class="t-ink" text-anchor="middle">training hospital</text>
+
+                    <path d="M428 212 V 220" class="s-hair"/>
+                    <text x="428" y="234" class="t-ink" text-anchor="middle">unseen hospital</text>
+
+                    <path d="M238 292 V 300" class="s-hair"/>
+                    <text x="238" y="314" class="t-accent" text-anchor="middle">after targeted augmentation</text>
+                </svg>
+            </div>
+        </figure>
+
+        <div class="wrap">
+            <div class="work__body">
+                <p>
+                    I benchmarked out-of-distribution generalisation strategies across
+                    large-scale medical datasets, comparing how different representation
+                    geometries behave when the scanner, the acquisition protocol and the
+                    patient population all change at once.
+                </p>
+                <p>
+                    MedAugmix came out of that work: a targeted augmentation strategy that
+                    improves generalisation by six percentage points across hospitals and
+                    demographics. It is not a new architecture. It is a different arrangement
+                    of what the model already sees.
+                </p>
+            </div>
+
+            <div class="notes">
+                <p class="note"><span class="note__key">Supervised by</span>Prof. Dr. Christian Ledig</p>
+                <p class="note"><span class="note__key">Read</span><a class="link" href="https://www.uni-bamberg.de/fileadmin/xai/studies/theses/2025/2025_Masterthesis_Sheikh.pdf" target="_blank" rel="noopener">Evaluating Hyper-spherical Embeddings and Targeted Augmentations (PDF)</a></p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 02 ============================================== -->
+
+    <section id="work-02" class="work">
+        <div class="wrap">
+            <div class="slug">
+                <span>02 &middot; Masoona Consulting</span>
+                <span>Nuremberg, 2025</span>
+            </div>
+
+            <h2 class="work__title"><span class="clause">The conversation is new.</span> <span class="clause">The process is not.</span></h2>
+
+            <p class="lede work__lede">
+                A driving licence intake system in which the language model never invents the
+                workflow. The steps, the states and the transitions are defined in BPMN and
+                executed by Flowable. A custom Model Context Protocol server lets a
+                conversation trigger them, and nothing else.
+            </p>
+        </div>
+
+        <figure class="wrap figure">
+            <figcaption class="figure__caption">
+                <span class="figure__label">Fig. 3</span>
+                <p class="figure__text">
+                    The path a document takes. Requests reach the model; identity documents do
+                    not. They go from the browser straight into encrypted storage through a
+                    one-time upload, are scanned there, and the model is told only that a valid
+                    document exists. <strong>Anything hidden inside a scanned PDF has nothing
+                    to reach.</strong>
+                </p>
+            </figcaption>
+
+            <div class="figure__frame figure__frame--diagram">
+                <svg class="fig-svg" viewBox="0 0 600 340" role="img"
+                     aria-label="A diagram. The browser sends plain language to an LLM and MCP server, which sits inside a dashed boundary marked model context, and which issues case operations to Flowable. Separately, identity documents travel from the browser along a path that goes around the dashed boundary and into encrypted storage, from which only a validity status returns to the model.">
+                    <rect x="210" y="52" width="156" height="78" rx="2" class="s-accent dash"/>
+                    <text x="288" y="42" class="t-accent" text-anchor="middle">model context</text>
+
+                    <rect x="12" y="68" width="104" height="46" rx="2" class="s-hair"/>
+                    <text x="64" y="95" class="t-ink" text-anchor="middle">browser</text>
+
+                    <rect x="222" y="68" width="132" height="46" rx="2" class="s-hair"/>
+                    <text x="288" y="95" class="t-ink" text-anchor="middle">LLM + MCP</text>
+
+                    <rect x="472" y="68" width="116" height="46" rx="2" class="s-hair"/>
+                    <text x="530" y="95" class="t-ink" text-anchor="middle">Flowable</text>
+
+                    <rect x="440" y="244" width="148" height="46" rx="2" class="s-hair"/>
+                    <text x="514" y="271" class="t-ink" text-anchor="middle">encrypted store</text>
+
+                    <path d="M116 91 H 222" class="s-ink" marker-end="url(#ar-ink)"/>
+                    <text x="160" y="80" class="t-sm" text-anchor="middle">plain language</text>
+
+                    <path d="M354 91 H 472" class="s-ink" marker-end="url(#ar-ink)"/>
+                    <text x="414" y="80" class="t-sm" text-anchor="middle">case operations</text>
+
+                    <path d="M64 114 V 272 H 440" class="s-accent" marker-end="url(#ar-accent)"/>
+                    <text x="248" y="262" class="t-accent" text-anchor="middle">identity documents</text>
+                    <text x="248" y="290" class="t-accent t-sm" text-anchor="middle">never enter the context</text>
+
+                    <path d="M470 244 L 338 118" class="s-graphite" marker-end="url(#ar-graphite)"/>
+                    <text x="436" y="196" class="t-sm">valid &middot; scanned</text>
+                </svg>
+            </div>
+        </figure>
+
+        <div class="wrap">
+            <div class="work__body">
+                <p>
+                    The server exposes a fixed set of case operations rather than a database. A
+                    request with no corresponding transition has nothing to call, so the failure
+                    mode is a conversation that cannot proceed, not a case sitting in a state the
+                    process never defined.
+                </p>
+                <p>
+                    I owned the delivery end to end: TypeScript and React, Microsoft Entra ID for
+                    authentication, the Flowable REST integration behind it, then Docker, Nginx
+                    and CI/CD. The decision I would defend hardest is the one in Fig. 3. Any
+                    design that routes user files through a language model inherits their
+                    contents as instructions, and routing them around it costs one upload
+                    endpoint.
+                </p>
+            </div>
+
+            <div class="notes">
+                <p class="note"><span class="note__key">Built with</span>TypeScript &middot; React &middot; Model Context Protocol &middot; Flowable &middot; Entra ID &middot; Docker &middot; Nginx</p>
+                <p class="note"><span class="note__key">Model choice</span>Set by benchmarking frontier and open-source systems on automated BPMN generation, validation and repair.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== 03 ============================================== -->
+
+    <section id="work-03" class="work">
+        <div class="wrap">
+            <div class="slug">
+                <span>03 &middot; Eva</span>
+                <span>Personal project</span>
+            </div>
+
+            <h2 class="work__title">The model explains, it does not compute</h2>
+
+            <p class="lede work__lede">
+                An iOS app that reads Apple Health data over the local network and sends it
+                nowhere else. Two Gemma models run through Ollama on a machine at home: one for
+                reasoning and tool calls, one for fast replies.
+            </p>
+        </div>
+
+        <figure class="wrap figure">
+            <figcaption class="figure__caption">
+                <span class="figure__label">Fig. 4</span>
+                <p class="figure__text">
+                    Two lanes, and the traffic only runs one way between them. A deterministic
+                    engine computes every recovery, sleep and training-load figure. The models
+                    receive those figures and put them into words. <strong>The arithmetic is
+                    auditable, and the half that can hallucinate has nothing numeric to
+                    invent.</strong>
+                </p>
+            </figcaption>
+
+            <div class="figure__frame figure__frame--diagram">
+                <svg class="fig-svg" viewBox="0 0 600 340" role="img"
+                     aria-label="A diagram in two lanes. The upper lane, labelled arithmetic and deterministic, runs from Apple Health through a calculation engine to a set of computed figures. Those figures pass down into the lower lane, labelled language and generative, which holds two Gemma models that produce an explanation in words. Nothing flows back upward.">
+                    <text x="12" y="40" class="t-ink">ARITHMETIC</text>
+                    <text x="112" y="40" class="t-sm">deterministic</text>
+                    <path d="M12 50 H 588" class="s-hair"/>
+
+                    <rect x="12" y="70" width="124" height="44" rx="2" class="s-hair"/>
+                    <text x="74" y="96" class="t-ink" text-anchor="middle">Apple Health</text>
+
+                    <path d="M136 92 H 208" class="s-ink" marker-end="url(#ar-ink)"/>
+                    <text x="172" y="81" class="t-sm" text-anchor="middle">local only</text>
+
+                    <rect x="208" y="70" width="176" height="44" rx="2" class="s-ink"/>
+                    <text x="296" y="96" class="t-ink" text-anchor="middle">calculation engine</text>
+
+                    <path d="M384 92 H 452" class="s-ink" marker-end="url(#ar-ink)"/>
+
+                    <rect x="452" y="70" width="136" height="44" rx="2" class="s-hair"/>
+                    <text x="520" y="96" class="t-ink t-sm" text-anchor="middle">recovery, sleep, load</text>
+
+                    <text x="12" y="190" class="t-ink">LANGUAGE</text>
+                    <text x="102" y="190" class="t-sm">generative</text>
+                    <path d="M12 200 H 588" class="s-hair"/>
+
+                    <path d="M520 114 V 222 H 262" class="s-accent"/>
+                    <path d="M262 222 V 236" class="s-accent" marker-end="url(#ar-accent)"/>
+                    <path d="M446 222 V 236" class="s-accent" marker-end="url(#ar-accent)"/>
+                    <text x="360" y="214" class="t-accent" text-anchor="middle">figures</text>
+
+                    <rect x="176" y="236" width="172" height="44" rx="2" class="s-hair"/>
+                    <text x="262" y="262" class="t-ink t-sm" text-anchor="middle">Gemma &middot; reasoning</text>
+
+                    <rect x="360" y="236" width="172" height="44" rx="2" class="s-hair"/>
+                    <text x="446" y="262" class="t-ink t-sm" text-anchor="middle">Gemma &middot; fast replies</text>
+
+                    <path d="M262 280 V 294 H 446 V 280" class="s-hair"/>
+                    <path d="M354 294 V 308" class="s-ink" marker-end="url(#ar-ink)"/>
+                    <text x="354" y="326" class="t-ink" text-anchor="middle">explanation, in words</text>
+                </svg>
+            </div>
+        </figure>
+
+        <div class="wrap">
+            <div class="work__body">
+                <p>
+                    A language model asked to produce a number will eventually produce a
+                    confident wrong one, and a health figure is exactly the kind of number
+                    somebody acts on without checking it.
+                </p>
+                <p>
+                    So the split is the whole design. The engine owns the arithmetic, the models
+                    own the language, and neither is asked to do the other one&rsquo;s job.
+                </p>
+            </div>
+
+            <div class="notes">
+                <p class="note"><span class="note__key">Built with</span>Swift &middot; HealthKit &middot; Ollama &middot; Gemma</p>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+<footer class="colophon">
+    <div class="wrap">
+        <div class="blot">
+            <canvas id="colophon-blot" role="img"
+                    aria-label="A folded ink blot, symmetrical about its vertical axis, drawn as the closing mark of the page."></canvas>
+        </div>
+
+        <ul class="contact">
+            <li><a class="link" href="https://www.linkedin.com/in/tayyabsheikh/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="link" href="https://github.com/TayyabSheikh" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+
+    </div>
+</footer>
+
+<script src="figure.js?v=7"></script>
+<script src="blot.js?v=7"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>
